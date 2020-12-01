@@ -1,0 +1,27 @@
+<div class="login">
+    <div class="login-form">
+        <!-- <img src="../../assets/santa-hat.png" style="background-color: transparent;" alt="santa hat"> -->
+        <div class="login-header">
+            Secret Santa Login
+        </div>
+        <form [formGroup]="form" class="login-padding" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" formControlName="username"/>
+                <div *ngIf="submitted && form.controls.username.errors" class="alert alert-danger" role="alert">Username Required</div>
+            </div>
+            <div class="form-group">
+                <label for="passowrd">Password</label>
+                <input type="text" class="form-control" formControlName="password"/>
+                <div *ngIf="submitted && form.controls.password.errors" class="alert alert-danger" role="alert">Password Required</div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary btn-lg btn-block" (click)="onSubmit()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Login
+                </button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block">Create Account</button>
+            </div>
+        </form>
+    </div>
+</div>

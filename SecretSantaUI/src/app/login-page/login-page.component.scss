@@ -1,0 +1,40 @@
+.login {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: lightblue;
+
+    &-form {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -250px;
+        margin-left: -250px;
+        width: 500px;
+        height: 500px;
+        background-color: white;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+
+    &-header {
+        position: relative;
+        text-align: center;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 32px;
+    }
+
+    &-padding {
+        padding: 0 10px;
+    }
+}
+
+.image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 50px;
+    background-color: transparent;
+}
