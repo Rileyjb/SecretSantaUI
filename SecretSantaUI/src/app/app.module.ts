@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LoginPageComponent } from './login-page/login-page.component';
+import { LoginPageComponent } from './login/login-page/login-page.component';
 
 @NgModule({
   declarations: [
