@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { UserServiceService } from 'src/app/UserServices/user-service.service';
+import { UserServiceService } from 'src/app/UserServices/user.service';
 import { Login } from '../models/login.model';
 import { Users } from '../models/Users.model';
 
@@ -14,12 +14,16 @@ export class LoginPageComponent implements OnInit {
   public form!: FormGroup;
   public submitted: boolean = false;
   public loading: boolean = false;
+  public incorrectLogin: boolean = false;
+  public success: boolean = false;
+  public name: string = '';
 
   private subscriptions: Subscription = new Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserServiceService) { }
+    private userService: UserServiceService
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -28,29 +32,10 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  addUser() {
-    debugger;
-    var user: Users = {
-    
-      email: "test@nafinc.com",
-      password: "tes123",
-      firstName: "test",
-      lastName: "test"
-    }
-
-    console.log("🚀 ~ file: login-page.component.ts ~ line 34 ~ LoginPageComponent ~ addUser ~ user", user);
-
-    this.subscriptions.add(
-      this.userService.addNewUser(user).subscribe(data => {
-        console.log(data);
-      })
-    );
-  }
-
-  onSubmit() { 
+  public onSubmit(): void { 
     this.submitted = true;
 
-    if (this.form.controls.username.errors) {
+    if (this.form.invalid) {
       return;
     }
 
@@ -61,25 +46,22 @@ export class LoginPageComponent implements OnInit {
       password: <string>this.form.controls.password.value
     }
 
-    console.log("🚀 ~ file: login-page.component.ts ~ line 57 ~ LoginPageComponent ~ onSubmit ~ user", currentUser);
-
     this.subscriptions.add(
-      this.userService.getLogin(currentUser).subscribe( data => {
-        console.log('data', data);
-        var response: any = data;
+      this.userService.getLogin(currentUser).subscribe( (data: string | any[]) => {
+        debugger;
         if (data.length > 0) {
-          this.userService.setCurrentUser(data);
+          this.name = data[0].firstname;
+          this.userService.setCurrentUser(data[0]);
           //change route
-          console.log('success');
           this.loading = false;
-          return;
+          this.incorrectLogin = false;
+          this.success = true;
         } else {
           this.loading = false;
-          console.log('fail');
-          return;
+          this.success = false;
+          this.incorrectLogin = true;
         }
       })
-    )
+    );
   }
-
 }
