@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Users } from '../login/models/Users.model';
 import { Login } from '../login/models/login.model';
@@ -13,8 +13,10 @@ export class UserServiceService {
   readonly APIURL='http://localhost:54605/api';
 
   currentUser = new Subject<Users>();
+  isLoggedIn = new BehaviorSubject<boolean>(false);
 
   currentUser$ = this.currentUser.asObservable();
+  isLoggedIn$ = this.isLoggedIn.asObservable();
 
   constructor(private http:HttpClient) { }
 
@@ -25,6 +27,10 @@ export class UserServiceService {
         throwError(error)
       )
     );
+  }
+
+  setLoginStatus(status: boolean) {
+    this.isLoggedIn.next(status);
   }
 
   addNewUser(newUser: Users):Observable<any[]> {

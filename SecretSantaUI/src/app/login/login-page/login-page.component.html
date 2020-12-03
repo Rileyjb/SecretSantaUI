@@ -6,27 +6,71 @@
         </div>
         <form [formGroup]="form" class="login-padding" (ngSubmit)="onSubmit()">
             <div class="form-group">
-                <div *ngIf="incorrectLogin" class="alert alert-danger" role="alert">Incorrect username or password</div>
-                <div *ngIf="success" class="alert alert-success" role="alert">Welcome {{ name }}</div>
+                <div *ngIf="incorrectLogin" 
+                    class="alert alert-danger" 
+                    role="alert">
+                    Incorrect username or password
+                </div>
+                <div *ngIf="success"
+                    class="alert alert-success"
+                    role="alert">
+                    Welcome {{ name }}
+                </div>
                 <label for="username">Username</label>
-                <input placeholder="Enter Email" type="text" class="form-control" formControlName="username"/>
-                <div *ngIf="submitted && form.controls.username.errors" class="alert alert-danger" role="alert">Username Required</div>
+                <input 
+                    placeholder="Enter Email" 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="username"
+                />
+                <div *ngIf="submitted && form.controls.username.errors" 
+                    class="alert alert-danger" 
+                    role="alert">
+                    Username Required
+                </div>
             </div>
-            <div class="form-group">
+            <div class="input-group">
                 <label for="passowrd">Password</label>
-                <input placeholder="Enter Password" type="password" class="form-control" formControlName="password"/>
-                <div *ngIf="submitted && form.controls.password.errors" class="alert alert-danger" role="alert">Password Required</div>
+                <input 
+                        placeholder="Enter Password" 
+                        type="password" 
+                        class="form-control" 
+                        formControlName="password"
+                    />
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="fas fa-camera"></i>
+                    </span>
+                </div>
+                
+                <div *ngIf="submitted && form.controls.password.errors" 
+                    class="alert alert-danger" 
+                    role="alert">
+                    Password Required
+                </div>
             </div>
             <div class="form-group">
-                <button [disabled]="loading" type="button" class="btn btn-primary btn-lg btn-block" (click)="onSubmit()">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                <button [disabled]="loading" 
+                    type="button" 
+                    class="btn btn-primary btn-lg btn-block" 
+                    (click)="onSubmit()">
+                    <span *ngIf="loading"
+                         class="spinner-border spinner-border-sm mr-1">
+                    </span>
                     Login
                 </button>
-                <button routerLink="/create-user" type="button" class="btn btn-secondary btn-lg btn-block">Create Account</button>
+                <button routerLink="/create-user" 
+                    routerLinkActive="active" 
+                    type="button" 
+                    class="btn btn-secondary btn-lg btn-block">
+                    Create Account
+                </button>
             </div>
         </form>
         <div>
-            <a class="login-guest">
+            <a href="" 
+                (click)="loginGuest()" 
+                class="login-guest">
                 Sign in as Guest
             </a>
             <a class="login-forgot">

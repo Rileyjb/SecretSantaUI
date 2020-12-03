@@ -35,6 +35,18 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
+  public loginGuest() {
+    var guest: Users = {
+      id: 1,
+      email: '',
+      firstName: 'Guest'
+    };
+
+    this.userService.setCurrentUser(guest);
+
+    this.router.navigate(['/groups']);
+  }
+
   public onSubmit(): void { 
     this.submitted = true;
 
@@ -53,13 +65,15 @@ export class LoginPageComponent implements OnInit {
       this.userService.getLogin(currentUser).subscribe( (data: any) => {
         if (data.length > 0) {
           this.name = data[0].firstname;
+          
           this.userService.setCurrentUser(data[0]);
+          this.userService.setLoginStatus(true);
           
           this.loading = false;
           this.incorrectLogin = false;
           this.success = true;
 
-          this.router.navigate(['groups'], {relativeTo: this.route});
+          this.router.navigate(['groups']);
         } else {
           this.loading = false;
           this.success = false;
