@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserServiceService } from 'src/app/UserServices/user.service';
 import { Login } from '../models/login.model';
@@ -22,7 +23,9 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -51,10 +54,12 @@ export class LoginPageComponent implements OnInit {
         if (data.length > 0) {
           this.name = data[0].firstname;
           this.userService.setCurrentUser(data[0]);
-          //change route
+          
           this.loading = false;
           this.incorrectLogin = false;
           this.success = true;
+
+          this.router.navigate(['groups'], {relativeTo: this.route});
         } else {
           this.loading = false;
           this.success = false;
