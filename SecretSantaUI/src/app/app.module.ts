@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from './login/login-page/login-page.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

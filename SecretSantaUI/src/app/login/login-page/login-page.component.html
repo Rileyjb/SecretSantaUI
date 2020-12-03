@@ -29,24 +29,26 @@
                     Username Required
                 </div>
             </div>
-            <div class="input-group">
+            <div class="form-group">
                 <label for="passowrd">Password</label>
-                <input 
-                        placeholder="Enter Password" 
-                        type="password" 
-                        class="form-control" 
-                        formControlName="password"
-                    />
-                <div class="input-group-append">
-                    <span class="input-group-text">
-                        <i class="fas fa-camera"></i>
-                    </span>
-                </div>
-                
-                <div *ngIf="submitted && form.controls.password.errors" 
-                    class="alert alert-danger" 
-                    role="alert">
-                    Password Required
+                <div class="input-group">
+                    <input 
+                            placeholder="Enter Password" 
+                            [type]="showPass ? 'text' : 'password'" 
+                            class="form-control" 
+                            formControlName="password"
+                        />
+                    <div class="input-group-append">
+                        <span (click)="showPassword()" class="input-group-text">
+                            <fa-icon *ngIf="!showPass" [icon]="eyeSlash"></fa-icon>
+                            <fa-icon *ngIf="showPass" [icon]="eye"></fa-icon>
+                        </span>
+                    </div>
+                    <div *ngIf="submitted && form.controls.password.errors" 
+                        class="alert alert-danger" 
+                        role="alert">
+                        Password Required
+                    </div>
                 </div>
             </div>
             <div class="form-group">

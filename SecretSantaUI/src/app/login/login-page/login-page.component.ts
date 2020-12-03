@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { UserServiceService } from 'src/app/UserServices/user.service';
 import { Login } from '../models/login.model';
@@ -18,14 +19,16 @@ export class LoginPageComponent implements OnInit {
   public incorrectLogin: boolean = false;
   public success: boolean = false;
   public name: string = '';
+  public eyeSlash = faEyeSlash;
+  public eye = faEye;
+  public showPass = false
 
   private subscriptions: Subscription = new Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserServiceService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +36,10 @@ export class LoginPageComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+
+  public showPassword() {
+    this.showPass = !this.showPass;
   }
 
   public loginGuest() {
@@ -65,7 +72,7 @@ export class LoginPageComponent implements OnInit {
       this.userService.getLogin(currentUser).subscribe( (data: any) => {
         if (data.length > 0) {
           this.name = data[0].firstname;
-          
+
           this.userService.setCurrentUser(data[0]);
           this.userService.setLoginStatus(true);
           
