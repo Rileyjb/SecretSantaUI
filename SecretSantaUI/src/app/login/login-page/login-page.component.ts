@@ -47,8 +47,7 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.subscriptions.add(
-      this.userService.getLogin(currentUser).subscribe( (data: string | any[]) => {
-        debugger;
+      this.userService.getLogin(currentUser).subscribe( (data: any) => {
         if (data.length > 0) {
           this.name = data[0].firstname;
           this.userService.setCurrentUser(data[0]);
