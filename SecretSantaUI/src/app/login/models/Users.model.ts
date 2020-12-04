@@ -5,4 +5,5 @@ export class Users {
     password?: string;
     firstName?: string = '';
     lastName?: string = '';
+    amazonLink?: string;
 }

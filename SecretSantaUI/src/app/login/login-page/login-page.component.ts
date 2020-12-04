@@ -34,7 +34,6 @@ export class LoginPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.count();
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -56,7 +55,7 @@ export class LoginPageComponent implements OnInit {
     this.loginService.setLoginStatus(true);
   }
 
-  public onSubmit(): void { 
+  public onSubmit(): void {
     this.submitted = true;
 
     if (this.form.invalid) {

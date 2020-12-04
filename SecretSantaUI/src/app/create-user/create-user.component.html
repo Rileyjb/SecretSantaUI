@@ -1,1 +1,147 @@
-<p>create-user works!</p>
+<div class="signup">
+    <div class="signup-form">
+        <div class="signup-header">
+            Elf Sign-Up
+        </div>
+        <div *ngIf="submitted && failed"
+            class="alert alert-danger" 
+            role="alert"
+        >
+            We Could Not Create Your Account At This Time
+        </div>
+        <form [formGroup]="form" class="signup-padding">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input 
+                    placeholder="Enter Email" 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="email"
+                />
+                <div *ngIf="submitted && form.controls.email.errors">
+                    <div *ngIf="form.controls.email.errors.email"
+                        class="alert alert-danger" 
+                        role="alert">
+                        Please Enter A Valid Email
+                    </div>
+                    <div *ngIf="form.controls.email.errors.required"
+                        class="alert alert-danger" 
+                        role="alert">
+                        Please Enter An Email
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div *ngIf="submitted && form.errors?.mismatch" 
+                    class="alert alert-danger" 
+                    role="alert">
+                    Passwords Must Match
+                </div>
+                <label for="passowrd">Password</label>
+                <div class="input-group">
+                    <input 
+                        placeholder="Enter Password" 
+                        [type]="showPass ? 'text' : 'password'" 
+                        class="form-control" 
+                        formControlName="password"
+                    />
+                    <div class="input-group-append">
+                        <span (click)="showPassword()" class="input-group-text">
+                            <fa-icon *ngIf="!showPass" [icon]="eyeSlash"></fa-icon>
+                            <fa-icon *ngIf="showPass" [icon]="eye"></fa-icon>
+                        </span>
+                    </div>
+                </div>
+                <div *ngIf="submitted && form.controls.password.errors" >
+                    <div *ngIf="form.controls.password.errors.minlength"
+                        class="alert alert-danger" 
+                        role="alert">
+                        Password Must Be At Least 8 Characters
+                    </div>
+                    <div *ngIf="form.controls.password.errors.required"
+                        class="alert alert-danger" 
+                        role="alert">
+                        Password required
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPass">Confirm Password</label>
+                <div class="input-group">
+                    <input 
+                        placeholder="Confirm Password" 
+                        [type]="showConfirmPass ? 'text' : 'password'" 
+                        class="form-control" 
+                        formControlName="confirmPass"
+                    />
+                    <div class="input-group-append">
+                        <span (click)="showConfirmPassword()" class="input-group-text">
+                            <fa-icon *ngIf="!showConfirmPass" [icon]="eyeSlash"></fa-icon>
+                            <fa-icon *ngIf="showConfirmPass" [icon]="eye"></fa-icon>
+                        </span>
+                    </div>
+                </div>
+                <div *ngIf="submitted && form.controls.confirmPass.errors" 
+                    class="alert alert-danger" 
+                    role="alert">
+                    Please Confirm Password
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input 
+                    placeholder="Enter Your First Name" 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="firstname"
+                />
+                <div *ngIf="submitted && form.controls.firstname.errors">
+                    <div *ngIf="form.controls.firstname.errors.required"
+                        class="alert alert-danger" 
+                        role="alert">
+                        Please Enter Your First Name
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input 
+                    placeholder="Enter Your Last Name" 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="lastname"
+                />
+                <div *ngIf="submitted && form.controls.lastname.errors">
+                    <div *ngIf="form.controls.lastname.errors.required"
+                        class="alert alert-danger" 
+                        role="alert">
+                        Please Enter Your Last Name
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="amazonlink">Amazon Wish List Link</label>
+                <h6>*optional</h6>
+                <input 
+                    placeholder="Enter Your Amazon Wish List Link" 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="amazonlink"
+                />
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" 
+                    type="button"
+                    (click)="onSubmit()" 
+                    class="btn btn-primary btn-lg btn-block">
+                    <span *ngIf="loading"
+                         class="spinner-border spinner-border-sm mr-1">
+                    </span>
+                    Create Account
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
