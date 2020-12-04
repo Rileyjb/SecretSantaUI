@@ -52,14 +52,10 @@ export class UserServiceService {
         return throwError( 'Something went wrong!' );
       })
     );
-
-    // return this.http.get(url).pipe(map((res: any) => {return res}));
   }
 
 
   setCurrentUser(user: any){
     this.currentUser.next(user);
-
-    console.log('user', user);
   }
 }

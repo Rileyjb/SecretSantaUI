@@ -32,6 +32,7 @@ export class LoginPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.count();
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -45,13 +46,12 @@ export class LoginPageComponent implements OnInit {
   public loginGuest() {
     var guest: Users = {
       id: 1,
-      email: '',
+      email: 'Guest@gmail.com',
       firstName: 'Guest'
     };
 
     this.userService.setCurrentUser(guest);
-
-    this.router.navigate(['/groups']);
+    this.userService.setLoginStatus(true);
   }
 
   public onSubmit(): void { 
