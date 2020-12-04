@@ -44,11 +44,11 @@
                             <fa-icon *ngIf="showPass" [icon]="eye"></fa-icon>
                         </span>
                     </div>
-                    <div *ngIf="submitted && form.controls.password.errors" 
-                        class="alert alert-danger" 
-                        role="alert">
-                        Password Required
-                    </div>
+                </div>
+                <div *ngIf="submitted && form.controls.password.errors" 
+                    class="alert alert-danger" 
+                    role="alert">
+                    Password Required
                 </div>
             </div>
             <div class="form-group">

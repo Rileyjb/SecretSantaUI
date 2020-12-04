@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { UserServiceService } from 'src/app/UserServices/user.service';
 import { Login } from '../models/login.model';
 import { Users } from '../models/Users.model';
+import { LoginService } from '../Services/login.service';
 
 @Component({
   selector: 'app-login-page',
@@ -28,6 +29,7 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserServiceService,
+    private loginService: LoginService,
     private router: Router
   ) { }
 
@@ -51,7 +53,7 @@ export class LoginPageComponent implements OnInit {
     };
 
     this.userService.setCurrentUser(guest);
-    this.userService.setLoginStatus(true);
+    this.loginService.setLoginStatus(true);
   }
 
   public onSubmit(): void { 
@@ -69,12 +71,12 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.subscriptions.add(
-      this.userService.getLogin(currentUser).subscribe( (data: any) => {
+      this.loginService.getLogin(currentUser).subscribe( (data: any) => {
         if (data.length > 0) {
           this.name = data[0].firstname;
 
           this.userService.setCurrentUser(data[0]);
-          this.userService.setLoginStatus(true);
+          this.loginService.setLoginStatus(true);
           
           this.loading = false;
           this.incorrectLogin = false;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { LoginService } from './login/Services/login.service';
 import { UserServiceService } from './UserServices/user.service';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { UserServiceService } from './UserServices/user.service';
 export class MyGuardGuard implements CanActivate {
 
   constructor(
-    private userService: UserServiceService,
+    private loginService: LoginService,
     private router: Router
   ) {}
 
@@ -17,7 +18,7 @@ export class MyGuardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.userService.isLoggedIn.value) {
+    if (this.loginService.isLoggedIn.value) {
       return true;
     } else {
       this.router.navigate(['']);
