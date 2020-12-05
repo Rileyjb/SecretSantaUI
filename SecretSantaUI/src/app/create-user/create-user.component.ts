@@ -72,6 +72,7 @@ export class CreateUserComponent implements OnInit {
     this.loading = true;
 
     var newUser: Users = {
+      id: 0,
       email: this.form.controls.email.value,
       password: this.form.controls.password.value,
       firstName: this.form.controls.firstname.value,

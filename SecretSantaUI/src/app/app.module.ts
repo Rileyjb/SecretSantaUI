@@ -9,12 +9,14 @@ import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from './login/login-page/login-page.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GroupsComponent } from './group/groups/groups.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    GroupsComponent
   ],
   imports: [
     BrowserModule,
