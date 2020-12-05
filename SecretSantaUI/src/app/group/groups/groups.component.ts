@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { timeStamp } from 'console';
 import { Subscription } from 'rxjs';
 import { UserServiceService } from 'src/app/UserServices/user.service';
 import { GroupService } from '../group-services/group.service';
@@ -21,15 +22,9 @@ export class GroupsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    debugger;
     /** Get user id */
-    this.subscriptions.add(
-      this.userService.currentUser$.subscribe( id => {
-        this.userId = id.id;
-        console.log("🚀 ~ file: groups.component.ts ~ line 29 ~ GroupsComponent ~ ngOnInit ~ this.userId", this.userId);
-        this.getGroups();
-      })
-    );
+    this.userId = this.userService.userId.value;
+    this.getGroups()
   }
 
   getGroups() {

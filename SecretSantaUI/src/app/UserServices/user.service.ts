@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Users } from '../login/models/Users.model';
 @Injectable({
@@ -11,8 +11,10 @@ export class UserServiceService {
   readonly APIURL='http://localhost:54605/api';
 
   currentUser = new Subject<Users>();
+  userId = new BehaviorSubject<number>(0);
   
   currentUser$ = this.currentUser.asObservable();
+  userId$ = this.userId.asObservable()
 
   constructor(private http:HttpClient) { }
 
@@ -35,5 +37,6 @@ export class UserServiceService {
 
   setCurrentUser(user: any){
     this.currentUser.next(user);
+    this.userId.next(user.id);
   }
 }

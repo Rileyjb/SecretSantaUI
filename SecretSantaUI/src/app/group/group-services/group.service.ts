@@ -14,7 +14,6 @@ export class GroupService {
 
   getGroupsByUserId(id: number): Observable<any[]> {
     const URL = `${this.APIURL}/GetGroupById?userId=${id}`;
-    debugger;
 
     return this.http.get(URL)
       .pipe(map((res: any) => {
