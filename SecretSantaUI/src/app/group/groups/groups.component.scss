@@ -1,0 +1,11 @@
+.groups {
+    display: flex;
+}
+
+::ng-deep html {
+    background-color: white !important;
+}
+
+::ng-deep .card {
+    margin: 0 10px;
+}

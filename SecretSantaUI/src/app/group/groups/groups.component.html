@@ -1,7 +1,18 @@
+<app-nav-bar
+  name="Groups">
+</app-nav-bar>
+
+<div *ngIf="!hasData">
+  <div>You are not apart of any groups</div>
+</div>
+
 <div class="groups">
-    <div *ngFor="let group of groups" class="card">
-        <div class="card-body">
-          {{ group.groupName }}
-        </div>
-      </div>
+  <div *ngFor="let group of groups" class="card" style="width: 18rem;">
+    <img class="card-img-top" src="../../../assets/santa-hat.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ group.groupName }}</h5>
+      <p class="card-text">{{ group.description }}</p>
+      <a href="#" class="btn btn-primary">View Group</a>
+    </div>
+  </div>
 </div>

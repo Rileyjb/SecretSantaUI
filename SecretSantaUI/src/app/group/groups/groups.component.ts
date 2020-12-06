@@ -13,6 +13,7 @@ export class GroupsComponent implements OnInit {
   private subscriptions: Subscription = new Subscription();
   private userId: number = 0;
   public groups: any;
+  public hasData: boolean = false;
   
 
   constructor(
@@ -30,7 +31,13 @@ export class GroupsComponent implements OnInit {
     this.subscriptions.add(
       this.groupService.getGroupsByUserId(this.userId).subscribe( data => {
         this.groups = data;
+        if (this.groups.length > 0) {
+          this.hasData = true;
+        } else {
+          this.hasData = false;
+        }
       })
+        
     );
   }
 

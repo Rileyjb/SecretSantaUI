@@ -51,3 +51,7 @@
     height: 50px;
     background-color: transparent;
 }
+
+::ng-deep html {
+    background-color: lightblue;
+}
