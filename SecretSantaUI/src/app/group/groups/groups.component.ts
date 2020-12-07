@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { UserServiceService } from 'src/app/UserServices/user.service';
 import { GroupService } from '../group-services/group.service';
@@ -12,9 +13,10 @@ export class GroupsComponent implements OnInit {
 
   private subscriptions: Subscription = new Subscription();
   private userId: number = 0;
+
   public groups: any;
   public hasData: boolean = false;
-  
+  public faEllipse = faEllipsisV;
 
   constructor(
     private userService: UserServiceService,

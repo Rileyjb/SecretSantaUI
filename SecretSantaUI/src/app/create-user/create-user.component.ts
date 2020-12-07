@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
-import { Login } from '../login/models/login.model';
 import { Users } from '../login/models/Users.model';
 import { LoginService } from '../login/Services/login.service';
 import { UserServiceService } from '../UserServices/user.service';

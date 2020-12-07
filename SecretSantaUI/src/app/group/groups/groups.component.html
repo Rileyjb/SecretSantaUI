@@ -2,6 +2,11 @@
   name="Groups">
 </app-nav-bar>
 
+<div class="button-group">
+  <button class="btn btn-primary button-group-button">Create Group</button>
+  <button class="btn btn-primary button-group-button">Join Group</button>
+</div>
+
 <div *ngIf="!hasData">
   <div>You are not apart of any groups</div>
 </div>
@@ -13,6 +18,8 @@
       <h5 class="card-title">{{ group.groupName }}</h5>
       <p class="card-text">{{ group.description }}</p>
       <a href="#" class="btn btn-primary">View Group</a>
+      <!-- TODO: add model for leave/delete group -->
+      <fa-icon class="ellipse" [icon]="faEllipse"></fa-icon>
     </div>
   </div>
 </div>
