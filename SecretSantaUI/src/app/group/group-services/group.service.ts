@@ -34,4 +34,13 @@ export class GroupService {
       })
     );
   }
+
+  JoinGroup(group: Groups): Observable<any[]> {
+    return this.http.post<any[]>(this.APIURL+"/JoinGroup?newGroup=", group)
+      .pipe(
+      catchError( error => {
+        return throwError( error );
+      })
+    );
+  }
 }
