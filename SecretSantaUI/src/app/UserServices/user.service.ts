@@ -28,7 +28,7 @@ export class UserServiceService {
   }
 
   addNewUser(newUser: Users):Observable<any[]> {
-    return this.http.post<any[]>(this.APIURL+"/AddNewUser?newUser="+newUser, newUser)
+    return this.http.post<any[]>(this.APIURL+"/AddNewUser?newUser=", newUser)
       .pipe(catchError((error: any) => 
         throwError(error)
       )

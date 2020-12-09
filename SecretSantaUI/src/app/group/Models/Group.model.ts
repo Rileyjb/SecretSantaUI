@@ -4,6 +4,6 @@ export class Groups {
     userId: number = 0;
     groupName?: string = '';
     addCode?: string;
-    isOwner?: number = 0;
+    ownerId?: number;
     description?: string = '';
 }
