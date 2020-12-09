@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Groups } from '../Models/Group.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,16 @@ export class GroupService {
         return res;
       }),
       catchError( error => {
-        return throwError( 'Something went wrong!' );
+        return throwError( error );
+      })
+    );
+  }
+
+  CreateNewGroup(group: Groups): Observable<any[]> {
+    return this.http.post<any[]>(this.APIURL+"/CreateGroup?user=", group)
+      .pipe(
+      catchError( error => {
+        return throwError( error );
       })
     );
   }
