@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { UserServiceService } from '../UserServices/user.service';
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss']
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit, OnDestroy {
 
   public form!: FormGroup;
   public eyeSlash = faEyeSlash;
@@ -94,6 +94,10 @@ export class CreateUserComponent implements OnInit {
         }
       })
     );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
 }

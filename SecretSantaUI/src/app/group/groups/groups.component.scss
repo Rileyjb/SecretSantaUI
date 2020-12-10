@@ -10,6 +10,18 @@
     }
 }
 
+.add-code {
+    width: 0;
+    opacity: 0;
+    transition: width 1s, opacity 1s ease-in-out;
+
+    &__show {
+        width: 150px;
+        opacity: 1;
+        transition: width 1s, opacity 1s ease-in-out;
+    }
+}
+
 .ellipse {
     position: relative;
     float: right;

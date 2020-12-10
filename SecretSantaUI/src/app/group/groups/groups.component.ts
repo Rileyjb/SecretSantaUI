@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { UserServiceService } from 'src/app/UserServices/user.service';
 import { GroupService } from '../group-services/group.service';
+import { Groups } from '../Models/Group.model';
 
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.scss']
 })
-export class GroupsComponent implements OnInit {
+export class GroupsComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription = new Subscription();
   private userId: number = 0;
@@ -17,6 +18,8 @@ export class GroupsComponent implements OnInit {
   public groups: any;
   public hasData: boolean = false;
   public faEllipse = faEllipsisV;
+  public show: boolean = false;
+  public addCode: string = '';
 
   constructor(
     private userService: UserServiceService,
@@ -26,7 +29,7 @@ export class GroupsComponent implements OnInit {
   ngOnInit(): void {
     /** Get user id */
     this.userId = this.userService.userId.value;
-    this.getGroups()
+    this.getGroups();
   }
 
   getGroups() {
@@ -39,8 +42,28 @@ export class GroupsComponent implements OnInit {
           this.hasData = false;
         }
       })
-        
     );
+  }
+
+  joinGroup() {
+    let newGroup: Groups = {
+      userId: this.userId,
+      addCode: this.addCode,
+    }
+
+    this.subscriptions.add(
+      this.groupService.JoinGroup(newGroup).subscribe( data => {
+        console.log('join group', data);
+      })
+    );
+
+    // TODO: make page show newly added group
+    this.getGroups();
+
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
 }
