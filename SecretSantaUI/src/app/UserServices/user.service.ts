@@ -10,7 +10,7 @@ export class UserServiceService {
 
   readonly APIURL='http://localhost:54605/api';
 
-  currentUser = new Subject<Users>();
+  currentUser = new BehaviorSubject<Users>(new Users);
   userId = new BehaviorSubject<number>(0);
   
   currentUser$ = this.currentUser.asObservable();
