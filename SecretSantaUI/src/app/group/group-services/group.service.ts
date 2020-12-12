@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Groups } from '../Models/Group.model';
 
@@ -10,6 +10,10 @@ import { Groups } from '../Models/Group.model';
 export class GroupService {
 
   readonly APIURL='http://localhost:54605/api';
+
+  openSidepanel = new BehaviorSubject<boolean>(false);
+
+  openSidepanel$ = this.openSidepanel.asObservable();
 
   constructor(private http:HttpClient) { }
 
@@ -42,5 +46,9 @@ export class GroupService {
         return throwError( error );
       })
     );
+  }
+
+  toggleSidepanel(open: boolean) {
+    this.openSidepanel.next(open);
   }
 }

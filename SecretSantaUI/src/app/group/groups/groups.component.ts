@@ -16,6 +16,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
   private userId: number = 0;
 
   public groups: any;
+  public addGroup: boolean = false;
   public hasData: boolean = false;
   public faEllipse = faEllipsisV;
   public show: boolean = false;
@@ -32,9 +33,15 @@ export class GroupsComponent implements OnInit, OnDestroy {
     /** Get user id */
     this.userId = this.userService.userId.value;
     this.getGroups();
+
+    this.subscriptions.add(
+      this.groupService.openSidepanel$.subscribe( data => {
+        this.addGroup = data;
+      })
+    );
   }
 
-  getGroups() {
+  private getGroups(): void {
     this.subscriptions.add(
       this.groupService.getGroupsByUserId(this.userId).subscribe( data => {
         this.groups = data;
@@ -47,30 +54,31 @@ export class GroupsComponent implements OnInit, OnDestroy {
     );
   }
 
-  createGroup() {
-    let newGroup: Groups = {
-      userId: this.userId,
-      groupName: 'Test Group 3',
-      ownerId: this.userId,
-      description: 'I made another another group from the UI'
-    };
-
-    this.subscriptions.add(
-      this.groupService.CreateNewGroup(newGroup).subscribe( data => {
-        this.getGroups();
-      })
-    );
-
-    // TODO: make page show newly added group
-    
+  public openPanel(): void {
+    this.groupService.toggleSidepanel(true);
   }
 
-  joinGroup() {
+  // createGroup() {
+  //   let newGroup: Groups = {
+  //     userId: this.userId,
+  //     groupName: 'Test Group 1',
+  //     ownerId: this.userId,
+  //     description: 'I made a group from the UI'
+  //   };
+
+  //   this.subscriptions.add(
+  //     this.groupService.CreateNewGroup(newGroup).subscribe( data => {
+  //       this.getGroups();
+  //     })
+  //   );
+  // }
+
+  public joinGroup(): void {
     let newGroup: Groups = {
       userId: this.userId,
       addCode: this.addCode,
     }
-
+    
     this.subscriptions.add(
       this.groupService.JoinGroup(newGroup).subscribe( (data: any) => {
         if (data === 1) {
