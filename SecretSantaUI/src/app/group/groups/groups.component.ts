@@ -20,6 +20,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
   public faEllipse = faEllipsisV;
   public show: boolean = false;
   public addCode: string = '';
+  public addError: boolean = false;
+  public addSuccess: boolean = false;
 
   constructor(
     private userService: UserServiceService,
@@ -45,6 +47,24 @@ export class GroupsComponent implements OnInit, OnDestroy {
     );
   }
 
+  createGroup() {
+    let newGroup: Groups = {
+      userId: this.userId,
+      groupName: 'Test Group 3',
+      ownerId: this.userId,
+      description: 'I made another another group from the UI'
+    };
+
+    this.subscriptions.add(
+      this.groupService.CreateNewGroup(newGroup).subscribe( data => {
+        this.getGroups();
+      })
+    );
+
+    // TODO: make page show newly added group
+    
+  }
+
   joinGroup() {
     let newGroup: Groups = {
       userId: this.userId,
@@ -52,14 +72,18 @@ export class GroupsComponent implements OnInit, OnDestroy {
     }
 
     this.subscriptions.add(
-      this.groupService.JoinGroup(newGroup).subscribe( data => {
-        console.log('join group', data);
+      this.groupService.JoinGroup(newGroup).subscribe( (data: any) => {
+        if (data === 1) {
+          this.addCode = '';
+          this.addSuccess = true;
+          this.addError = false;
+          this.getGroups();
+        } else {
+          this.addError = true;
+          this.addSuccess = false;
+        }
       })
     );
-
-    // TODO: make page show newly added group
-    this.getGroups();
-
   }
 
   ngOnDestroy() {
