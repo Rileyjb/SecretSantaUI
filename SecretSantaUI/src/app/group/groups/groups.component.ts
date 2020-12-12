@@ -34,6 +34,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
     this.userId = this.userService.userId.value;
     this.getGroups();
 
+    /** get side panel status */
     this.subscriptions.add(
       this.groupService.openSidepanel$.subscribe( data => {
         this.addGroup = data;
@@ -78,7 +79,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
       userId: this.userId,
       addCode: this.addCode,
     }
-    
+
     this.subscriptions.add(
       this.groupService.JoinGroup(newGroup).subscribe( (data: any) => {
         if (data === 1) {
