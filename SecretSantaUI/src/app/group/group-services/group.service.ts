@@ -13,7 +13,7 @@ export class GroupService {
 
   constructor(private http:HttpClient) { }
 
-  getGroupsByUserId(id: number): Observable<any[]> {
+  getGroupsByUserId(id: number): Observable<Groups[]> {
     const URL = `${this.APIURL}/GetGroupById?userId=${id}`;
 
     return this.http.get(URL)
