@@ -32,12 +32,14 @@ export class GroupsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     /** Get user id */
     this.userId = this.userService.userId.value;
-    this.getGroups();
 
     /** get side panel status */
     this.subscriptions.add(
       this.groupService.openSidepanel$.subscribe( data => {
         this.addGroup = data;
+        if (!data) {
+          this.getGroups();
+        }
       })
     );
   }
@@ -58,21 +60,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
   public openPanel(): void {
     this.groupService.toggleSidepanel(true);
   }
-
-  // createGroup() {
-  //   let newGroup: Groups = {
-  //     userId: this.userId,
-  //     groupName: 'Test Group 1',
-  //     ownerId: this.userId,
-  //     description: 'I made a group from the UI'
-  //   };
-
-  //   this.subscriptions.add(
-  //     this.groupService.CreateNewGroup(newGroup).subscribe( data => {
-  //       this.getGroups();
-  //     })
-  //   );
-  // }
 
   public joinGroup(): void {
     let newGroup: Groups = {

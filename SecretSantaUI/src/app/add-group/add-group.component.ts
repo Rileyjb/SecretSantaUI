@@ -1,6 +1,9 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { GroupService } from '../group/group-services/group.service';
+import { Groups } from '../group/Models/Group.model';
+import { UserServiceService } from '../UserServices/user.service';
 
 @Component({
   selector: 'app-add-group',
@@ -10,18 +13,57 @@ import { GroupService } from '../group/group-services/group.service';
 export class AddGroupComponent implements OnInit, OnDestroy {
 
   public open: boolean = false;
+  public groupForm!: FormGroup;
+  public submitted: boolean = false;
+  public success: boolean = false;
+  public failed: boolean = false;
 
   private subscriptions: Subscription = new Subscription();
+  private userId: number = 0;
 
-  constructor(private groupService: GroupService) { }
+  constructor(
+    private groupService: GroupService,
+    private userService: UserServiceService,
+    private formBuilder: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
+    this.userId = this.userService.userId.value;
+
+    this.groupForm = this.formBuilder.group({
+      groupName: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+
     this.subscriptions.add(
       this.groupService.openSidepanel$.subscribe( data => {
         this.open = data;
       })
     );
 
+  }
+
+  createGroup() {
+    this.submitted = true;
+
+    if (this.groupForm.invalid) {
+      return;
+    }
+
+    let newGroup: Groups = {
+      userId: this.userId,
+      groupName: this.groupForm.controls.groupName.value,
+      ownerId: this.userId,
+      description: this.groupForm.controls.description.value,
+    }
+
+    this.groupService.CreateNewGroup(newGroup).subscribe((data: any) => {
+      if (data == 2) {
+        this.success = true;
+      } else {
+        this.failed = true
+      }
+    });
   }
 
   closePanel() {

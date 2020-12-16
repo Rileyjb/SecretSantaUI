@@ -1,0 +1,34 @@
+.add-group{
+
+    &-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: transparent;
+    }
+
+    &-form {
+        margin: 0 10px;
+    }
+
+    &-header {
+        font-size: 50px;
+        padding-bottom: 40px;
+    }
+
+    &-content {
+        display: flex;
+        height: 100%;
+    }
+
+    &-sidenav {
+        
+        padding: 10px 30px;
+    }
+}
+
+::ng-deep .mat-drawer-inner-container {
+    padding-top: 15px !important;
+}
