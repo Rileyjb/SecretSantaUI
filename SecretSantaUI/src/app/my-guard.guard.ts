@@ -18,10 +18,17 @@ export class MyGuardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.loginService.isLoggedIn.value) {
+    const expirationTimer = 1000 * 60 * 30;
+    const now = new Date().getTime();
+
+    const user: any = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const expire = new Date(JSON.parse(localStorage.getItem('expire') || '{}')).getTime();
+    
+    if (user && now - expire < expirationTimer) {
       return true;
     } else {
       this.router.navigate(['']);
+      localStorage.removeItem('currentUser');
       return false;
     }
   }

@@ -52,7 +52,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     };
 
     this.userService.setCurrentUser(guest);
-    this.loginService.setLoginStatus(true);
   }
 
   public onSubmit(): void {
@@ -75,7 +74,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
           this.name = data.firstName;
 
           this.userService.setCurrentUser(data);
-          this.loginService.setLoginStatus(true);
           
           this.loading = false;
           this.incorrectLogin = false;

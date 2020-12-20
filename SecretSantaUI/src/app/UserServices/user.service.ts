@@ -10,10 +10,8 @@ export class UserServiceService {
 
   readonly APIURL='http://localhost:54605/api';
 
-  currentUser = new BehaviorSubject<Users>(new Users);
   userId = new BehaviorSubject<number>(0);
   
-  currentUser$ = this.currentUser.asObservable();
   userId$ = this.userId.asObservable()
 
   constructor(private http:HttpClient) { }
@@ -36,7 +34,8 @@ export class UserServiceService {
   }
 
   setCurrentUser(user: any){
-    this.currentUser.next(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('expire', JSON.stringify((new Date)));
     this.userId.next(user.id);
   }
 }

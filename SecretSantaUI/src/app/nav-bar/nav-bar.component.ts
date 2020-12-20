@@ -10,7 +10,7 @@ import { UserServiceService } from '../UserServices/user.service';
 })
 export class NavBarComponent implements OnInit {
 
-  @Input() name: string = '';
+  @Input() page: string = '';
 
   public user: Users = new Users;
 
@@ -18,6 +18,7 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.currentUser.value;
+    this.user = JSON.parse(localStorage.getItem('currentUser') || '{}').firstName;
   }
 
 }

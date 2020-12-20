@@ -10,10 +10,6 @@ import { Users } from '../models/Users.model';
 })
 export class LoginService {
 
-  isLoggedIn = new BehaviorSubject<boolean>(false);
-
-  isLoggedIn$ = this.isLoggedIn.asObservable();
-
   readonly APIURL='http://localhost:54605/api';
 
 
@@ -30,9 +26,5 @@ export class LoginService {
         return throwError( error );
       })
     );
-  }
-
-  setLoginStatus(status: boolean) {
-    this.isLoggedIn.next(status);
   }
 }
