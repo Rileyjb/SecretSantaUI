@@ -18,7 +18,7 @@ export class MyGuardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const expirationTimer = 1000 * 60 * 30;
+    const expirationTimer = 1000 * 60 * 60; /** 1 hour */
     const now = new Date().getTime();
 
     const user: any = JSON.parse(localStorage.getItem('currentUser') || '{}');
