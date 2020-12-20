@@ -4,6 +4,7 @@
     right: 0;
     top: 0;
     bottom: 0;
+    padding: 10px 0;
 
     &-form {
         position: fixed;
@@ -12,7 +13,7 @@
         margin-top: -375px;
         margin-left: -250px;
         width: 500px;
-        height: 750px;
+        height: fit-content;
         background-color: white;
         border: 1px solid white;
         border-radius: 5px;
@@ -23,6 +24,7 @@
         text-align: center;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 32px;
+        padding-top: 10px;
     }
 
     &-padding {
