@@ -36,6 +36,5 @@ export class UserServiceService {
   setCurrentUser(user: any){
     localStorage.setItem('currentUser', JSON.stringify(user));
     localStorage.setItem('expire', JSON.stringify((new Date)));
-    this.userId.next(user.id);
   }
 }

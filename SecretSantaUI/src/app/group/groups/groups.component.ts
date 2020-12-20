@@ -31,7 +31,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     /** Get user id */
-    this.userId = this.userService.userId.value;
+    this.userId = JSON.parse(localStorage.getItem('currentUser')!).id;
 
     /** get side panel status */
     this.subscriptions.add(
