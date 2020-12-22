@@ -70,7 +70,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(
       this.loginService.getLogin(currentUser).subscribe((data: any) => {
-        if (data.id !== null) {
+        if (data.email !== null) {
           this.name = data.firstName;
 
           this.userService.setCurrentUser(data);

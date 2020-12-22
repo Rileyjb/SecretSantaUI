@@ -30,6 +30,7 @@
 
 <div class="groups">
   <div *ngFor="let group of groups" class="card" style="width: 18rem;">
+    <!-- Allow users to upload thier own photos -->
     <img class="card-img-top" src="../../../assets/santa-hat.png" alt="Card image cap">
     <div class="card-body">
       <h2 class="card-title">{{ group.groupName }}</h2>
@@ -41,6 +42,6 @@
   </div>
 </div>
 
-<div *ngIf="addGroup">
+<div >
   <app-add-group></app-add-group>
 </div>

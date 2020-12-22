@@ -32,10 +32,12 @@
     float: right;
 }
 
-::ng-deep html {
-    background-color: white !important;
-}
+::ng-deep {
+    html {
+        background-color: white !important;
+    }
 
-::ng-deep .card {
-    margin: 0 10px;
-}
+    .card {
+        margin: 0 10px 10px 10px;
+    }
+} 

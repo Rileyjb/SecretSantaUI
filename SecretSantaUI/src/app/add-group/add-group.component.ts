@@ -28,7 +28,7 @@ export class AddGroupComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.userId = this.userService.userId.value;
+    this.userId = JSON.parse(localStorage.getItem('currentUser')!).id;
 
     this.groupForm = this.formBuilder.group({
       groupName: ['', Validators.required],
@@ -60,14 +60,22 @@ export class AddGroupComponent implements OnInit, OnDestroy {
     this.groupService.CreateNewGroup(newGroup).subscribe((data: any) => {
       if (data == 2) {
         this.success = true;
+        this.submitted = false;
+        this.groupForm.reset();
+        this.groupForm.clearValidators();
+        this.groupService.toggleSidepanel(false);
+        this.success = false
       } else {
         this.failed = true
       }
+      
     });
   }
 
   closePanel() {
     this.groupService.toggleSidepanel(false);
+    this.groupForm.reset();
+    this.groupForm.clearValidators();
   }
 
   ngOnDestroy() {
