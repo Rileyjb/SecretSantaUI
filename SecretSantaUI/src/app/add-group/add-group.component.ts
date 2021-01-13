@@ -1,9 +1,8 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { GroupService } from '../group/group-services/group.service';
 import { Groups } from '../group/Models/Group.model';
-import { UserServiceService } from '../UserServices/user.service';
 
 @Component({
   selector: 'app-add-group',
@@ -11,6 +10,9 @@ import { UserServiceService } from '../UserServices/user.service';
   styleUrls: ['./add-group.component.scss']
 })
 export class AddGroupComponent implements OnInit, OnDestroy {
+
+  @ViewChild('createGroupModal') 
+  public groupModel!: ElementRef;
 
   public groupForm!: FormGroup;
   public submitted: boolean = false;
@@ -39,7 +41,7 @@ export class AddGroupComponent implements OnInit, OnDestroy {
     this.groupForm.clearValidators();
   }
 
-  createGroup() {
+  public createGroup(): void {
     this.submitted = true;
 
     if (this.groupForm.invalid) {
@@ -57,6 +59,7 @@ export class AddGroupComponent implements OnInit, OnDestroy {
       if (data == 2) {
         this.success = true;
         this.submitted = false;
+        this.groupModel.nativeElement.click();
         this.groupService.UpdateGroups(true);
         this.groupForm.reset();
         this.groupForm.clearValidators();
