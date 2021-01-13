@@ -14,6 +14,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AddGroupComponent } from './add-group/add-group.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { DeleteGroupComponent } from './delete-group/delete-group.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +23,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     GroupsComponent,
     NavBarComponent,
     AddGroupComponent,
+    DeleteGroupComponent,
     
   ],
   imports: [

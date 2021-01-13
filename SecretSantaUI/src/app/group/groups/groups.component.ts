@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { GroupService } from '../group-services/group.service';
@@ -10,10 +10,6 @@ import { Groups } from '../Models/Group.model';
   styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  @ViewChild('createGroupModal') 
-  public groupModel!: ElementRef;
-
   private subscriptions: Subscription = new Subscription();
   private userId: number = 0;
 
@@ -40,7 +36,6 @@ export class GroupsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions.add(
       this.groupService.updateGroup$.subscribe(data => {
         if (data) {
-          this.groupModel.nativeElement.click();
           this.getGroups();
           this.groupService.UpdateGroups(false);
         }
@@ -80,6 +75,10 @@ export class GroupsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       })
     );
+  }
+
+  public editGroup(currentGroup: Groups): void {
+      this.groupService.SetCurrentGroup(currentGroup);
   }
 
   ngOnDestroy() {

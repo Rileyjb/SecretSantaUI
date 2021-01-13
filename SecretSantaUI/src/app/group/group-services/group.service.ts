@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Groups } from '../Models/Group.model';
 
@@ -12,11 +12,14 @@ export class GroupService {
   readonly APIURL='http://localhost:54605/api';
 
   updateGroupSource = new BehaviorSubject<boolean>(false);
+  currentGroupSource = new Subject<Groups>();
 
   updateGroup$ = this.updateGroupSource.asObservable();
+  currentGroup$ = this.currentGroupSource.asObservable();
 
   constructor(private http:HttpClient) { }
 
+  /** API SERVICES */
   getGroupsByUserId(id: number): Observable<Groups[]> {
     const URL = `${this.APIURL}/GetGroupById?userId=${id}`;
 
@@ -48,7 +51,21 @@ export class GroupService {
     );
   }
 
+  DeleteGroup(groupId?: number): any {
+    return this.http.delete<any[]>(this.APIURL+"/DeleteGroup?groupId="+groupId)
+      .pipe(
+        catchError( error => {
+          return throwError( error );
+        })
+      );
+  }
+
+  /** ALL OTHER SERVICES */
   UpdateGroups(newGroup: boolean): void {
     this.updateGroupSource.next(newGroup);
+  }
+
+  SetCurrentGroup(currentGroup: Groups): void {
+    this.currentGroupSource.next(currentGroup);
   }
 }
