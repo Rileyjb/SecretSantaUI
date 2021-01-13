@@ -11,9 +11,9 @@ export class GroupService {
 
   readonly APIURL='http://localhost:54605/api';
 
-  openSidepanel = new BehaviorSubject<boolean>(false);
+  updateGroupSource = new BehaviorSubject<boolean>(false);
 
-  openSidepanel$ = this.openSidepanel.asObservable();
+  updateGroup$ = this.updateGroupSource.asObservable();
 
   constructor(private http:HttpClient) { }
 
@@ -48,7 +48,7 @@ export class GroupService {
     );
   }
 
-  toggleSidepanel(open: boolean) {
-    this.openSidepanel.next(open);
+  UpdateGroups(newGroup: boolean): void {
+    this.updateGroupSource.next(newGroup);
   }
 }

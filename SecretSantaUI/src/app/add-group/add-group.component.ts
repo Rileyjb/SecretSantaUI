@@ -12,7 +12,6 @@ import { UserServiceService } from '../UserServices/user.service';
 })
 export class AddGroupComponent implements OnInit, OnDestroy {
 
-  public open: boolean = false;
   public groupForm!: FormGroup;
   public submitted: boolean = false;
   public success: boolean = false;
@@ -23,7 +22,6 @@ export class AddGroupComponent implements OnInit, OnDestroy {
 
   constructor(
     private groupService: GroupService,
-    private userService: UserServiceService,
     private formBuilder: FormBuilder,
   ) { }
 
@@ -34,13 +32,11 @@ export class AddGroupComponent implements OnInit, OnDestroy {
       groupName: ['', Validators.required],
       description: ['', Validators.required]
     });
+  }
 
-    this.subscriptions.add(
-      this.groupService.openSidepanel$.subscribe( data => {
-        this.open = data;
-      })
-    );
-
+  public clearForm(): void {
+    this.groupForm.reset();
+    this.groupForm.clearValidators();
   }
 
   createGroup() {
@@ -61,21 +57,15 @@ export class AddGroupComponent implements OnInit, OnDestroy {
       if (data == 2) {
         this.success = true;
         this.submitted = false;
+        this.groupService.UpdateGroups(true);
         this.groupForm.reset();
         this.groupForm.clearValidators();
-        this.groupService.toggleSidepanel(false);
         this.success = false
       } else {
         this.failed = true
       }
       
     });
-  }
-
-  closePanel() {
-    this.groupService.toggleSidepanel(false);
-    this.groupForm.reset();
-    this.groupForm.clearValidators();
   }
 
   ngOnDestroy() {

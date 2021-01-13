@@ -1,48 +1,46 @@
-<div class="modal" [ngClass]="open ? 'modal-show' : 'modal-hide'" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="exampleModalLongTitle">Create New Group</h3>
-          <button type="button" class="close" (click)="closePanel()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title" id="createGroupTitle">Create Group</h1>
+      <button type="button" class="close" data-dismiss="modal" (click)="clearForm()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="add-group=form" [formGroup]="groupForm">
+        <div *ngIf="submitted && success" 
+            class="alert alert-success" 
+            role="alert">
+            Group created successfully!
         </div>
-        <div class="modal-body">
-            <form class="add-group=form" [formGroup]="groupForm">
-                <div *ngIf="submitted && success" 
-                    class="alert alert-success" 
-                    role="alert">
-                    Group created successfully!
-                </div>
-                <div *ngIf="submitted && failed" 
-                    class="alert alert-danger" 
-                    role="alert">
-                    Group was not created, please try again later.
-                </div>
-                <div *ngIf="submitted && groupForm.controls.groupName.errors" 
-                    class="alert alert-danger" 
-                    role="alert">
-                    You must name your group
-                </div>
-                <div class="form-group">
-                    <label for="groupName">Group Name</label>
-                    <input formControlName="groupName" type="text" class="form-control" id="groupName" placeholder="Enter group name">
-                </div>
-                <div *ngIf="submitted && groupForm.controls.description.errors" 
-                    class="alert alert-danger" 
-                    role="alert">
-                    Please add a description to your group
-                </div>
-                <div class="form-group">
-                    <label for="description">Group Description</label>
-                    <textarea formControlName="description" class="form-control" id="description" placeholder="Group Description"></textarea>
-                </div>
-            </form>
+        <div *ngIf="submitted && failed" 
+            class="alert alert-danger" 
+            role="alert">
+            Group was not created, please try again later.
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closePanel()">Close</button>
-          <button type="submit" class="btn btn-primary" (click)="createGroup()">Save changes</button>
+        <div *ngIf="submitted && groupForm.controls.groupName.errors" 
+            class="alert alert-danger" 
+            role="alert">
+            You must name your group
         </div>
-      </div>
+        <div class="form-group">
+            <label for="groupName">Group Name</label>
+            <input formControlName="groupName" type="text" class="form-control" id="groupName" placeholder="Enter group name">
+        </div>
+        <div *ngIf="submitted && groupForm.controls.description.errors" 
+            class="alert alert-danger" 
+            role="alert">
+            Please add a description to your group
+        </div>
+        <div class="form-group">
+            <label for="description">Group Description</label>
+            <textarea formControlName="description" class="form-control" id="description" placeholder="Group Description"></textarea>
+        </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clearForm()">Close</button>
+      <button type="button" class="btn btn-primary" (click)="createGroup()">Save changes</button>
     </div>
   </div>
+</div>

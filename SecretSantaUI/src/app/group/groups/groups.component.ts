@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
-import { UserServiceService } from 'src/app/UserServices/user.service';
 import { GroupService } from '../group-services/group.service';
 import { Groups } from '../Models/Group.model';
 
@@ -10,22 +9,23 @@ import { Groups } from '../Models/Group.model';
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.scss']
 })
-export class GroupsComponent implements OnInit, OnDestroy {
+export class GroupsComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @ViewChild('createGroupModal') 
+  public groupModel!: ElementRef;
 
   private subscriptions: Subscription = new Subscription();
   private userId: number = 0;
 
   public groups: any;
-  public addGroup: boolean = false;
+  public show: boolean = false;
   public hasData: boolean = false;
   public faEllipse = faEllipsisV;
-  public show: boolean = false;
   public addCode: string = '';
   public addError: boolean = false;
   public addSuccess: boolean = false;
 
   constructor(
-    private userService: UserServiceService,
     private groupService: GroupService
   ) { }
 
@@ -33,12 +33,16 @@ export class GroupsComponent implements OnInit, OnDestroy {
     /** Get user id */
     this.userId = JSON.parse(localStorage.getItem('currentUser')!).id;
 
-    /** get side panel status */
+    this.getGroups();
+  }
+
+  ngAfterViewInit() {
     this.subscriptions.add(
-      this.groupService.openSidepanel$.subscribe( data => {
-        this.addGroup = data;
-        if (!data) {
+      this.groupService.updateGroup$.subscribe(data => {
+        if (data) {
+          this.groupModel.nativeElement.click();
           this.getGroups();
+          this.groupService.UpdateGroups(false);
         }
       })
     );
@@ -55,10 +59,6 @@ export class GroupsComponent implements OnInit, OnDestroy {
         }
       })
     );
-  }
-
-  public openPanel(): void {
-    this.groupService.toggleSidepanel(true);
   }
 
   public joinGroup(): void {
