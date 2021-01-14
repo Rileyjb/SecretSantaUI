@@ -2,14 +2,14 @@
   <div class="modal-content">
     <div class="modal-header">
       <h1 class="modal-title" id="createGroupTitle">Create Group</h1>
-      <button type="button" class="close" data-dismiss="modal" (click)="clearForm()" aria-label="Close">
+      <button #createGroupModal type="button" class="close" data-dismiss="modal" (click)="clearForm()" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <form class="add-group-form" [formGroup]="groupForm">
         <div *ngIf="submitted && success" 
-            class="alert alert-success" 
+            class="alert alert-success"  
             role="alert">
             Group created successfully!
         </div>
