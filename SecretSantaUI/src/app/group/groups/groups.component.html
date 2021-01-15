@@ -35,9 +35,11 @@
     <div class="card-body">
       <h2 class="card-title">{{ group.groupName }}</h2>
       <p class="card-text">{{ group.description }}</p>
-      <a href="#" class="btn btn-primary">View Group</a>
-      <!-- TODO: add model for leave/delete group -->
-      <fa-icon (click)="editGroup(group)" class="ellipse" [icon]="faEllipse" data-toggle="modal" data-target="#editGroupModal"></fa-icon>
+      <div class="card-buttons__space">
+        <a href="#" class="btn btn-primary card-buttons__save">View Group</a>
+        <fa-icon (click)="editGroup(group)" class="ellipse edit-modal card-buttons__edit" [icon]="faEllipse" data-toggle="modal" data-target="#editGroupModal"></fa-icon>
+      </div>
+      
     </div>
   </div>
 </div>

@@ -32,6 +32,10 @@
     float: right;
 }
 
+.edit-modal {
+    width: 50px;
+}
+
 ::ng-deep {
     html {
         background-color: white !important;
@@ -41,3 +45,21 @@
         margin: 0 10px 10px 10px;
     }
 } 
+
+.card-buttons {
+
+    &__save {
+        position: absolute;
+        bottom: 20px;
+    }
+    
+    &__edit {
+        right: -20px;
+        bottom: 20px;
+        position: absolute;
+    }
+
+    &__space {
+        margin: 45px 0;
+    }
+}
