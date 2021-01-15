@@ -19,6 +19,10 @@ export class DeleteGroupComponent implements OnInit, OnDestroy {
   public currentGroup: Groups = new Groups();
   public editForm!: FormGroup;
   public canEdit: boolean = false;
+  public deleteFailed: boolean = false;
+  public saveSuccess: boolean = false;
+  public saveFail: boolean = false;
+  public leaveFail: boolean = false;
 
   constructor(
     private groupService: GroupService,
@@ -30,8 +34,6 @@ export class DeleteGroupComponent implements OnInit, OnDestroy {
       this.groupService.currentGroup$.subscribe(data => {
         this.currentGroup = data;
         this.ValidateUser();
-        
-        console.log(data);
       })
     );
 
@@ -47,6 +49,11 @@ export class DeleteGroupComponent implements OnInit, OnDestroy {
   }
 
   private ValidateUser(): void {
+    this.deleteFailed = false;
+    this.saveSuccess = false;
+    this.saveFail = false;
+    this.leaveFail = false;
+
     const saveButton = document.querySelector('.save-button');
     this.canEdit = this.currentGroup.userId === this.currentGroup.ownerId;
 
@@ -67,11 +74,49 @@ export class DeleteGroupComponent implements OnInit, OnDestroy {
       if (data > 1){
         this.groupService.UpdateGroups(true);
         this.closeButton.nativeElement.click();
-        console.log('success');
       } else {
-        console.log('fail');
+        this.deleteFailed = true;
       }
     });
+  }
+
+  public SaveGroup(): void {
+
+    if(!this.editForm.valid) {
+      return;
+    }
+
+    const updatedGroup: Groups = {
+      groupId: this.currentGroup.groupId,
+      groupName: this.editForm.controls.groupName.value,
+      description: this.editForm.controls.groupDescription.value,
+      addCode: this.currentGroup.addCode,
+      userId: this.currentGroup.userId
+    };
+
+    this.groupService.SaveGroup(updatedGroup).subscribe((data: any) => {
+      if(data > 0) {
+        this.saveSuccess = true;
+        this.saveFail = false;
+        this.groupService.UpdateGroups(true);
+        this.closeButton.nativeElement.click();
+      } else {
+        this.saveSuccess = false;
+        this.saveFail = true;
+      }
+    });
+  }
+
+  public LeaveGroup(): void {
+    this.groupService.LeaveGroup(this.currentGroup.groupId!, this.currentGroup.userId).subscribe((data: any) => {
+      if(data > 0) {
+        this.leaveFail = false;
+        this.groupService.UpdateGroups(true);
+        this.closeButton.nativeElement.click();
+      } else {
+        this.leaveFail = true;
+      }
+    })
   }
 
   ngOnDestroy(): void {

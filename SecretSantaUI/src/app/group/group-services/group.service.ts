@@ -60,6 +60,24 @@ export class GroupService {
       );
   }
 
+  SaveGroup(group: Groups): Observable<any[]> {
+    return this.http.post<any[]>(`${this.APIURL}/updateGroup?group=`, group)
+      .pipe(
+        catchError( error => {
+          return throwError( error );
+        })
+      );
+  }
+
+  LeaveGroup(groupId: number, userId: number): Observable<any[]> {
+    return this.http.delete<any[]>(`${this.APIURL}/deleteFromGroup?userId=${userId}&groupId=${groupId}`)
+      .pipe(
+        catchError( error => {
+          return throwError( error );
+        })
+      );
+  }
+
   /** ALL OTHER SERVICES */
   UpdateGroups(newGroup: boolean): void {
     this.updateGroupSource.next(newGroup);

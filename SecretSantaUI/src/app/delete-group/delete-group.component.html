@@ -8,11 +8,41 @@
     </div>
     <div class="modal-body">
       <form [formGroup]="editForm">
+        <div *ngIf="deleteFailed" 
+            class="alert alert-danger" 
+            role="alert">
+            Group was not deleted, please try again later.
+        </div>
+        <div *ngIf="leaveFail" 
+            class="alert alert-danger" 
+            role="alert">
+            Could not leave group, please try again later.
+        </div>
+        <div *ngIf="saveSuccess" 
+            class="alert alert-success" 
+            role="alert">
+            Group data saved.
+        </div>
+        <div *ngIf="saveFail" 
+            class="alert alert-danger" 
+            role="alert">
+            Group was not saved, please try again later.
+        </div>
         <div class="form-group">
+          <div *ngIf="editForm.dirty && !editForm.controls.groupName.value" 
+            class="alert alert-danger" 
+            role="alert">
+            Your group must have a name.
+          </div>
           <label for="groupName">Group Name</label>
           <input formControlName="groupName" type="text" class="form-control" id="groupName" placeholder="Enter group name">
         </div>
         <div class="form-group">
+          <div *ngIf="editForm.dirty && !editForm.controls.groupDescription.value" 
+            class="alert alert-danger" 
+            role="alert">
+            Your group must have a description.
+          </div>
           <label for="description">Group Description</label>
           <textarea formControlName="groupDescription" class="form-control" id="description" placeholder="Group Description"></textarea>
         </div>
@@ -23,9 +53,10 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button #closeButton type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button #saveGroup type="button" [disabled]="!canEdit" class="btn btn-primary save-button">Save changes</button>
-      <button *ngIf="canEdit" type="button" class="btn btn-primary" (click)="DeleteGroup()">Delete group</button>
+      <button *ngIf="canEdit" type="button" class="btn btn-block btn-primary" (click)="DeleteGroup()">Delete group</button>
+      <button *ngIf="!canEdit" type="button" class="btn btn-block btn-primary" (click)="LeaveGroup()">Leave group</button>
+      <button #saveGroup type="button" [disabled]="!canEdit" class="btn btn-primary btn-block save-button" (click)="SaveGroup()">Save changes</button>
+      <button #closeButton type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
     </div>
   </div>
 </div>

@@ -1,0 +1,9 @@
+::ng-deep {
+    .modal-footer {
+        display: block !important;
+    }
+
+    .modal-footer>:not(:first-child) {
+        margin-left: 0 !important;
+    }
+}
