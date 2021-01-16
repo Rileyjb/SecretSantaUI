@@ -4,6 +4,7 @@
     right: 0;
     top: 0;
     bottom: 0;
+    background-color: lightblue !important;
 
     &-form {
         position: fixed;
@@ -51,8 +52,4 @@
     left: 0;
     height: 50px;
     background-color: transparent;
-}
-
-::ng-deep html {
-    background-color: lightblue;
 }
