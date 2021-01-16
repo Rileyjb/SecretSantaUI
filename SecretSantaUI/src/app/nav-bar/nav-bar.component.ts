@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { GroupService } from '../group/group-services/group.service';
 import { Users } from '../login/models/Users.model';
-import { UserServiceService } from '../UserServices/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,12 +13,28 @@ export class NavBarComponent implements OnInit {
   @Input() page: string = '';
 
   public user: Users = new Users;
+  public searchStr: string = '';
+  
 
-  constructor(private userService: UserServiceService) { }
+  constructor(
+    private router: Router,
+    private groupService: GroupService
+  ) { 
+   
+  }
 
   ngOnInit(): void {
-    this.user = this.userService.currentUser.value;
+    
     this.user = JSON.parse(localStorage.getItem('currentUser') || '{}').firstName;
+  }
+
+  public SearchGroups(): void {
+    this.groupService.GroupSearch(this.searchStr!);
+  }
+
+  public Logout(): void {
+    localStorage.clear();
+    this.router.navigate(['']);
   }
 
 }

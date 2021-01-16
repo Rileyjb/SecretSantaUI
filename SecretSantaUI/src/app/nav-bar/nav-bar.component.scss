@@ -1,0 +1,31 @@
+.profile {
+    width: fit-content;
+    float: right;
+
+    &__button {
+        margin-left: 10px;
+    }
+}
+
+.dropdown {
+    font-size: large;
+    text-align: left;
+    cursor: pointer;
+
+    &:not(:last-child) {
+        padding-bottom: 10px;
+        border-bottom: 1px solid gray;
+    }
+
+    &:last-child {
+        padding-top: 10px;
+    }
+}
+
+
+
+.welcome {
+    padding: 0 20px;
+    font-size: larger;
+    font-family: 'Roboto', sans-serif;
+}

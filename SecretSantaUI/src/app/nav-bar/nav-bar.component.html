@@ -1,8 +1,24 @@
 <nav class="navbar navbar-light justify-content-between" style="background-color: #e3f2fd; margin-bottom: 20px;">
     <a class="navbar-brand">{{ page }}</a>
     <form class="form-inline">
-      <div>Welcome {{ user }}</div>
-      <input class="form-control mr-sm-2" type="search" placeholder="Search Groups" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <div class="welcome">Welcome {{ user }}</div>
+      <input class="form-control mr-sm-2" type="search" [(ngModel)]="searchStr" [ngModelOptions]="{standalone: true}" placeholder="Search Groups" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="SearchGroups()">Search</button>
+      <button class="btn btn-outline-dark profile__button" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Profile
+      </button>
     </form>
   </nav>
+  <div class="profile">
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+        <div class="dropdown dropdown__profile">
+          Profile
+        </div>
+        <div class="dropdown" (click)="Logout()">
+          Logout
+        </div>
+      </div>
+    </div>
+  </div>
+ 

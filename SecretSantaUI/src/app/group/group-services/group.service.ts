@@ -13,9 +13,11 @@ export class GroupService {
 
   updateGroupSource = new BehaviorSubject<boolean>(false);
   currentGroupSource = new Subject<Groups>();
+  searchGroupSource = new Subject<string>();
 
   updateGroup$ = this.updateGroupSource.asObservable();
   currentGroup$ = this.currentGroupSource.asObservable();
+  searchGroup$ = this.searchGroupSource.asObservable();
 
   constructor(private http:HttpClient) { }
 
@@ -85,5 +87,9 @@ export class GroupService {
 
   SetCurrentGroup(currentGroup: Groups): void {
     this.currentGroupSource.next(currentGroup);
+  }
+
+  GroupSearch(searchStr: string): void {
+    this.searchGroupSource.next(searchStr);
   }
 }

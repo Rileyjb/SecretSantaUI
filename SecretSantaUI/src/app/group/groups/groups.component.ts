@@ -30,6 +30,10 @@ export class GroupsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.userId = JSON.parse(localStorage.getItem('currentUser')!).id;
 
     this.getGroups();
+
+    this.groupService.searchGroup$.subscribe(data => {
+      this.SearchGroups(data);
+    })
   }
 
   ngAfterViewInit() {
@@ -41,6 +45,26 @@ export class GroupsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       })
     );
+  }
+
+  private SearchGroups(searchStr: string): void {
+    const groups = document.querySelector('.groups');
+    
+    if(!searchStr || searchStr === undefined) {
+      groups?.querySelectorAll('.card').forEach(card => {
+        card.removeAttribute('hidden');
+      });
+    } else {
+      groups?.querySelectorAll('.card').forEach(card => {
+        if(!card.getAttribute('id')?.toUpperCase().includes(searchStr.toUpperCase())) {
+          card.setAttribute('hidden', 'true');
+        } else {
+          card.removeAttribute('hidden');
+        }
+      });
+    }
+
+    
   }
 
   private getGroups(): void {
