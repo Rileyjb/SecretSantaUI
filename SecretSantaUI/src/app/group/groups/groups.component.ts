@@ -63,8 +63,6 @@ export class GroupsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     }
-
-    
   }
 
   private getGroups(): void {
