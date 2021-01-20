@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginService } from './login/Services/login.service';
-import { UserServiceService } from './UserServices/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +8,6 @@ import { UserServiceService } from './UserServices/user.service';
 export class MyGuardGuard implements CanActivate {
 
   constructor(
-    private loginService: LoginService,
     private router: Router
   ) {}
 
