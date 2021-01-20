@@ -39,7 +39,6 @@ export class UserListComponent implements OnInit, AfterViewChecked {
           if (selectedUser.length > 0 && selectedUser[0].secretSanta) {
             this.secretSanta = selectedUser[0].firstName + ' ' + selectedUser[0].lastName;
             this.secretSantaId = selectedUser[0].id;
-            
           }
         }
       });
