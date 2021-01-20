@@ -27,7 +27,7 @@ export class MyGuardGuard implements CanActivate {
     if (user && now - expire < expirationTimer) {
       return true;
     } else {
-      this.router.navigate(['']);
+      this.router.navigate(['#']);
       localStorage.removeItem('currentUser');
       return false;
     }
