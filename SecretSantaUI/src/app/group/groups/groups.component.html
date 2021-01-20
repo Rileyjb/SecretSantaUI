@@ -36,7 +36,7 @@
       <h2 class="card-title">{{ group.groupName }}</h2>
       <p class="card-text">{{ group.description }}</p>
       <div class="card-buttons__space">
-        <a href="#" class="btn btn-primary card-buttons__save">View Group</a>
+        <a [routerLink]="['/user-list', group.groupId]" class="btn btn-primary card-buttons__save">View Group</a>
         <fa-icon (click)="editGroup(group)" class="ellipse edit-modal card-buttons__edit" [icon]="faEllipse" data-toggle="modal" data-target="#editGroupModal"></fa-icon>
       </div>
       

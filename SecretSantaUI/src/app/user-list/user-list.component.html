@@ -1,0 +1,17 @@
+<app-nav-bar page='Users'></app-nav-bar>
+<div *ngIf="users.length === 0" class="alert alert-danger" role="alert">
+    Unable to get group members, please try again.
+</div>
+<div *ngIf="ssFail" class="alert alert-danger" role="alert">
+    Unable to assign you a secret santa, please try again.
+</div>
+<div class="list-padding">
+    <div class="user-util">
+        <button [disabled]="secretSanta !== ''" type="button" class="btn btn-primary btn-spacing" (click)="GetSecretSanta()">Get Secret Santa</button>
+        <div class="user-util__selected" *ngIf="secretSanta !== ''">You are secret santa for {{secretSanta}}</div>
+    </div>
+    <ul class="list-group">
+        <li *ngFor="let user of users" [routerLink]="['./user', user.id]" id={{user.id}} class="list-group-item">{{ user.firstName }} {{ user.lastName }}</li>
+    </ul>
+</div>
+

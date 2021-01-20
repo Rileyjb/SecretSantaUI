@@ -2,7 +2,7 @@
     <a class="navbar-brand">{{ page }}</a>
     <form class="form-inline">
       <div class="welcome">Welcome {{ user }}</div>
-      <input class="form-control mr-sm-2" type="search" [(ngModel)]="searchStr" [ngModelOptions]="{standalone: true}" placeholder="Search Groups" aria-label="Search">
+      <input class="form-control mr-sm-2" type="search" [(ngModel)]="searchStr" [ngModelOptions]="{standalone: true}" placeholder="Search {{ page }}" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="SearchGroups()">Search</button>
       <button class="btn btn-outline-dark profile__button" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         Profile

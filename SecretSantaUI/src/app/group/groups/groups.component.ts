@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { GroupService } from '../group-services/group.service';
@@ -22,7 +23,8 @@ export class GroupsComponent implements OnInit, AfterViewInit, OnDestroy {
   public addSuccess: boolean = false;
 
   constructor(
-    private groupService: GroupService
+    private groupService: GroupService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +35,7 @@ export class GroupsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.groupService.searchGroup$.subscribe(data => {
       this.SearchGroups(data);
-    })
+    });
   }
 
   ngAfterViewInit() {

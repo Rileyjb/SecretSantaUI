@@ -1,0 +1,20 @@
+.list-padding {
+    padding: 0 10px;
+}
+
+.btn-spacing {
+    margin-bottom: 10px;
+}
+
+.user-util {
+    display: flex;
+
+    &__selected {
+        padding: 10px 0 0 10px;
+        font-size: 20px;
+    }
+}
+
+.selected-user {
+   box-shadow: inset 0px 0px 11px 5px rgba(0, 191, 255, .2);
+}
