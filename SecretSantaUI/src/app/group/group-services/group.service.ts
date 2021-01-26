@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environmentApi } from 'src/app/enums/environment.enum';
 import { Groups } from '../Models/Group.model';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Groups } from '../Models/Group.model';
 })
 export class GroupService {
 
-  readonly APIURL='http://localhost:54605/api';
+  readonly APIURL=`${environmentApi.Prod}/api`;
 
   updateGroupSource = new BehaviorSubject<boolean>(false);
   currentGroupSource = new Subject<Groups>();

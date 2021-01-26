@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { environmentApi } from 'src/app/enums/environment.enum';
 import { Login } from '../models/login.model';
 import { Users } from '../models/Users.model';
 
@@ -10,7 +11,7 @@ import { Users } from '../models/Users.model';
 })
 export class LoginService {
 
-  readonly APIURL='http://localhost:54605/api';
+  readonly APIURL=`${environmentApi.Prod}/api`;
 
 
   constructor(private http:HttpClient) { }

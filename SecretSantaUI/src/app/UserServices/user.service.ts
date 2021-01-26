@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Users } from '../login/models/Users.model';
+import { environmentApi } from '../enums/environment.enum';
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
 
-  readonly APIURL='http://localhost:54605/api';
+  readonly APIURL=`${environmentApi.Prod}/api`;
 
   userId = new BehaviorSubject<number>(0);
   
