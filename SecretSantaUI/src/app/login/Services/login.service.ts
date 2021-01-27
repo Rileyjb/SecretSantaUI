@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environmentApi } from 'src/app/enums/environment.enum';
+import { environment } from 'src/environments/environment';
 import { Login } from '../models/login.model';
 import { Users } from '../models/Users.model';
 
@@ -11,7 +12,7 @@ import { Users } from '../models/Users.model';
 })
 export class LoginService {
 
-  readonly APIURL=`${environmentApi.Prod}/api`;
+  readonly APIURL= environment.production ? `${environmentApi.Prod}/api` : `${environmentApi.Dev}/api`;
 
 
   constructor(private http:HttpClient) { }

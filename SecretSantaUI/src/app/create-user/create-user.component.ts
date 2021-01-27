@@ -81,7 +81,9 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(
       this.userService.addNewUser(newUser).subscribe( (data: any) => {
-        if (data == 'User added successfully') {
+        if (data > 0) {
+          newUser.id = data;
+          newUser.password = "****";
           this.userService.setCurrentUser(newUser);
           
           this.loading = false;

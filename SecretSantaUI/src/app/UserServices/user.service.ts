@@ -4,12 +4,13 @@ import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Users } from '../login/models/Users.model';
 import { environmentApi } from '../enums/environment.enum';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
 
-  readonly APIURL=`${environmentApi.Prod}/api`;
+  readonly APIURL= environment.production ? `${environmentApi.Prod}/api` : `${environmentApi.Dev}/api`;
 
   userId = new BehaviorSubject<number>(0);
   

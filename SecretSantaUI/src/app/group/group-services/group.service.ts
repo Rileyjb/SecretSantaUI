@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environmentApi } from 'src/app/enums/environment.enum';
+import { environment } from 'src/environments/environment';
 import { Groups } from '../Models/Group.model';
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Groups } from '../Models/Group.model';
 })
 export class GroupService {
 
-  readonly APIURL=`${environmentApi.Prod}/api`;
+  readonly APIURL= environment.production ? `${environmentApi.Prod}/api` : `${environmentApi.Dev}/api`;
 
   updateGroupSource = new BehaviorSubject<boolean>(false);
   currentGroupSource = new Subject<Groups>();
