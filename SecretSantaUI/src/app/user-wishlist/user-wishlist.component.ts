@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Users } from '../login/models/Users.model';
 
 @Component({
   selector: 'app-user-wishlist',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserWishlistComponent implements OnInit {
 
-  constructor() { }
+  private currentUser: Users = new Users();
+  private santaId: number = 0;
+
+  constructor(
+    private router: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
+
+    this.router.params.subscribe(params => {
+      this.santaId = +params['id'];
+    });
   }
 
 }
