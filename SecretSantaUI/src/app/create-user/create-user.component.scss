@@ -6,14 +6,15 @@
     bottom: 0;
     padding: 10px 0;
     background-color: lightblue;
+    height: auto;
+    min-height: fit-content;
 
     &-form {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        margin-top: -375px;
-        margin-left: -250px;
-        width: 500px;
+        display: flex;
+        margin: 8% auto;
+        flex-direction: column;
+        min-width: 30%;
+        width: fit-content;
         height: fit-content;
         background-color: white;
         border: 1px solid white;
