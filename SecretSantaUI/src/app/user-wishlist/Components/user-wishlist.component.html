@@ -1,0 +1,7 @@
+<app-nav-bar page='User List'></app-nav-bar>
+
+<div>
+    <ul class="list-group">
+        <li *ngFor="let item of itemList" id={{item.itemName}} class="list-group-item">{{ item.itemName }}</li>
+    </ul>
+</div>

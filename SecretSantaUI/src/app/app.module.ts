@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { DeleteGroupComponent } from './delete-group/delete-group.component';
 import { UserListComponent } from './user-list/user-list.component';
-import { UserWishlistComponent } from './user-wishlist/user-wishlist.component';
+import { UserWishlistComponent } from './user-wishlist/Components/user-wishlist.component';
 @NgModule({
   declarations: [
     AppComponent,
