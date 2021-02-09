@@ -6,6 +6,13 @@
 
 <div>
     <ul class="list-group">
-        <li *ngFor="let item of itemList" id={{item.itemName}} class="list-group-item">{{ item.itemName }}</li>
+        <li *ngFor="let item of itemList" 
+        id={{item.itemName}} 
+        class="list-group-item">
+            <a 
+                href={{item.itemLink}} 
+                target="_blank"
+            >{{ item.itemName }}</a>
+        </li>
     </ul>
 </div>
