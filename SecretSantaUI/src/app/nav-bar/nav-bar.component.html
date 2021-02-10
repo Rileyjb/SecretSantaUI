@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light justify-content-between" style="background-color: #e3f2fd; margin-bottom: 20px;">
+<nav class="navbar navbar-light justify-content-between" style="background-color: #e3f2fd; margin-bottom: 20px; z-index: 99999;">
     <a class="navbar-brand">{{ page }}</a>
     <form class="form-inline">
       <div class="welcome">Welcome {{ user }}</div>
@@ -12,7 +12,7 @@
   <div class="profile">
     <div class="collapse" id="collapseExample">
       <div class="card card-body">
-        <div class="dropdown dropdown__profile">
+        <div [routerLink]="['/profile']" class="dropdown dropdown__profile">
           Profile
         </div>
         <div class="dropdown" (click)="Logout()">

@@ -17,6 +17,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { DeleteGroupComponent } from './delete-group/delete-group.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserWishlistComponent } from './user-wishlist/Components/user-wishlist.component';
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { UserWishlistComponent } from './user-wishlist/Components/user-wishlist.
     DeleteGroupComponent,
     UserListComponent,
     UserWishlistComponent,
+    ProfileComponent,
     
   ],
   imports: [

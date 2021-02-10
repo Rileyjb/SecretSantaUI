@@ -22,10 +22,14 @@
     }
 }
 
-
-
 .welcome {
     padding: 0 20px;
     font-size: larger;
     font-family: 'Roboto', sans-serif;
+}
+
+::ng-deep {
+    .card-body {
+        z-index: 9;
+    }
 }

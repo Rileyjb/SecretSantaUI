@@ -1,0 +1,44 @@
+.signup {
+    position: absolute;
+    margin-top: -20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    padding: 10px 0;
+    background-color: lightblue;
+    height: 100%;
+    min-height: fit-content;
+
+    &-form {
+        display: flex;
+        margin: 170px auto;
+        flex-direction: column;
+        min-width: 30%;
+        width: fit-content;
+        height: fit-content;
+        background-color: white;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+
+    &-header {
+        position: relative;
+        text-align: center;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 32px;
+        padding-top: 10px;
+    }
+
+    &-padding {
+        padding: 0 10px;
+    }
+}
+
+.btn-padding {
+    margin-bottom: 10px;
+}
+
+.alert-padding {
+    margin: 10px;
+}

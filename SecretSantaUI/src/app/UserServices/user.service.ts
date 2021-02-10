@@ -18,7 +18,7 @@ export class UserServiceService {
 
   constructor(private http:HttpClient) { }
 
-  // Get user list
+  /** API CALLS */
   getUserList():Observable<any[]> {
     return this.http.get<any>(this.APIURL+'/GetUserList')
       .pipe(catchError((error: any) => 
@@ -51,6 +51,15 @@ export class UserServiceService {
     );
   }
 
+  updateUser(newUser: Users): Observable<Users> {
+    return this.http.post<Users>(`${this.APIURL}/UpdateUser?newUser=`, newUser)
+      .pipe(catchError((error: any) => 
+        throwError(error)
+        )
+      );
+  }
+
+  /** SERVICES */
   setCurrentUser(user: any){
     localStorage.setItem('currentUser', JSON.stringify(user));
     localStorage.setItem('expire', JSON.stringify((new Date)));

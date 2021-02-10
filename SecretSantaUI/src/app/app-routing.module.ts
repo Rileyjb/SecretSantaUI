@@ -4,6 +4,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { GroupsComponent } from './group/groups/groups.component';
 import { LoginPageComponent } from './login/login-page/login-page.component';
 import { MyGuardGuard } from './my-guard.guard';
+import { ProfileComponent } from './profile/profile.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserWishlistComponent } from './user-wishlist/Components/user-wishlist.component';
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path:'#', component:LoginPageComponent},
   {path:'create-user', component:CreateUserComponent},
   {path:'groups', component:GroupsComponent, canActivate: [MyGuardGuard]},
+  {path:'profile', component:ProfileComponent, canActivate: [MyGuardGuard]},
   {path:'user-list/:id', component:UserListComponent, canActivate: [MyGuardGuard]},
   {path:'user-list/:id/user/:id', component:UserWishlistComponent, canActivate: [MyGuardGuard]},
   {path:'**', component:LoginPageComponent}

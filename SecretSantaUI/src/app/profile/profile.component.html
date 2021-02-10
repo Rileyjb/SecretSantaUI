@@ -1,0 +1,103 @@
+<app-nav-bar
+  page="Profile">
+</app-nav-bar>
+
+
+
+<!-- <ul>
+    <li> button to view wish list </li>
+    <li> modal to view wish list + add remove items </li>
+    <li>possible option to view all secret santas in one place that links to users page??</li>
+</ul> -->
+
+<div class="signup">
+    <div class="signup-form">
+        <div class="signup-header">
+            {{ currentUser.firstName }}
+        </div>
+        <div *ngIf="updated && form.valid"
+            class="alert alert-success alert-padding" 
+            role="alert">
+            Profile updated successfully
+        </div>
+        <div *ngIf="formErrors"
+            class="alert alert-danger alert-padding" 
+            role="alert">
+            Unable to update profile, please try again at a later time
+        </div>
+        <form [formGroup]="form" class="signup-padding">
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input 
+                    placeholder="Enter Your First Name" 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="firstname"
+                />
+                <div *ngIf="submitted && form.controls.firstname.errors">
+                    <div *ngIf="form.controls.firstname.errors.required"
+                        class="alert alert-danger" 
+                        role="alert">
+                        Please Enter Your First Name
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input 
+                    placeholder="Enter Your Last Name" 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="lastname"
+                />
+                <div *ngIf="submitted && form.controls.lastname.errors">
+                    <div *ngIf="form.controls.lastname.errors.required"
+                        class="alert alert-danger" 
+                        role="alert">
+                        Please Enter Your Last Name
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input 
+                    placeholder="Enter Email" 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="email"
+                />
+                <div *ngIf="submitted && form.controls.email.errors">
+                    <div *ngIf="form.controls.email.errors.email"
+                        class="alert alert-danger" 
+                        role="alert">
+                        Please Enter A Valid Email
+                    </div>
+                    <div *ngIf="form.controls.email.errors.required"
+                        class="alert alert-danger" 
+                        role="alert">
+                        Please Enter An Email
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="amazonlink">Amazon Wish List Link</label>
+                <h6>*optional</h6>
+                <input 
+                    placeholder="Enter Your Amazon Wish List Link" 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="amazonlink"
+                />
+            </div>
+            <button 
+                type="button" 
+                class="btn btn-block btn-primary btn-padding" 
+                (click)="UpdateProfile()"
+            >
+            <span *ngIf="loading"
+                class="spinner-border spinner-border-sm mr-1">
+            </span>
+            Save Profile</button>
+        </form>
+    </div>
+</div>
