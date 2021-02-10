@@ -48,7 +48,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     var guest: Users = {
       id: 1,
       email: 'Guest@gmail.com',
-      firstName: 'Guest'
+      firstName: 'Guest',
+      lastName: 'McTesterson'
     };
 
     this.userService.setCurrentUser(guest);
