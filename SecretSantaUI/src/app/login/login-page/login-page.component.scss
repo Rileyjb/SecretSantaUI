@@ -1,4 +1,7 @@
 .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     left: 0;
     right: 0;
@@ -7,12 +10,11 @@
     background-color: lightblue !important;
 
     &-form {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        margin-top: -250px;
-        margin-left: -250px;
-        width: 500px;
+        display: flex;
+        flex-direction: column;
+        margin: 11.5% auto;
+        width: fit-content;
+        min-width: 30%;
         height: 500px;
         background-color: white;
         border: 1px solid white;
@@ -24,25 +26,18 @@
         text-align: center;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-size: 32px;
-        margin-top: 15px;
+        margin: 15px;
     }
 
     &-padding {
         padding: 0 10px;
     }
 
-    &-guest {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        padding: 0 10px 10px 10px;
-    }
-
-    &-forgot {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        padding: 0 10px 10px 10px;
+    &-buttons {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        margin-top: auto;
     }
 }
 
