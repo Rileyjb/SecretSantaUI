@@ -13,11 +13,13 @@ import { GroupsComponent } from './group/groups/groups.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AddGroupComponent } from './add-group/add-group.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { DeleteGroupComponent } from './delete-group/delete-group.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserWishlistComponent } from './user-wishlist/Components/user-wishlist.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,6 @@ import { ProfileComponent } from './profile/profile.component';
     UserListComponent,
     UserWishlistComponent,
     ProfileComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -41,7 +42,9 @@ import { ProfileComponent } from './profile/profile.component';
     CommonModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatCheckboxModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

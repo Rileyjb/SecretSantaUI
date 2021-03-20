@@ -1,5 +1,6 @@
-import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { GroupService } from '../group/group-services/group.service';
 import { Users } from '../login/models/Users.model';
 import { UserServiceService } from '../UserServices/user.service';
@@ -9,15 +10,17 @@ import { UserServiceService } from '../UserServices/user.service';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit, AfterViewChecked {
+export class UserListComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   public id!: number;
   public users: Users[] = []; 
   public secretSanta: string = '';
   public secretSantaId: number = 0;
   public ssFail: boolean = false;
+  public ssReady: boolean = false;
 
   private currentUser: Users = new Users();
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private router: ActivatedRoute,
@@ -33,6 +36,7 @@ export class UserListComponent implements OnInit, AfterViewChecked {
 
       this.userService.getGroupUsers(this.id).subscribe(users => {
         if (users !== null) {
+          this.ssReady = users[0].ssReady;
           this.users = users;
           const selectedUser = this.users.filter(x => x.secretSanta === this.currentUser.id );
 
@@ -50,7 +54,7 @@ export class UserListComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    this.highlightSelected();
+    this.highlightSelected(); 
   }
 
   private SearchUsers(searchStr: string): void {
@@ -101,5 +105,18 @@ export class UserListComponent implements OnInit, AfterViewChecked {
     } else {
       this.ssFail = true;
     }
+  }
+
+  public updateSSReady($event): void {
+    this.ssReady = $event;
+
+    this.subscriptions.add(
+      this.groupService.updateSSReady(this.ssReady, this.id).subscribe(data => {
+      })
+    );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

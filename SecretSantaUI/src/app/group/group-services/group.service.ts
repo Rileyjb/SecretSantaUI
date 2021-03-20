@@ -37,6 +37,15 @@ export class GroupService {
     );
   }
 
+  updateSSReady(ssReady: boolean, groupId: number): Observable<boolean> {
+    return this.http.post<boolean>(`${this.APIURL}/UpdateSS?ssReady=${ssReady}&groupId=${groupId}`,'')
+      .pipe(
+        catchError( error => {
+          return throwError( error );
+        })
+      );
+  }
+
   CreateNewGroup(group: Groups): Observable<any[]> {
     return this.http.post<any[]>(this.APIURL+"/CreateGroup?user=", group)
       .pipe(

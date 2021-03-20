@@ -6,8 +6,11 @@
     Unable to assign you a secret santa, please try again.
 </div>
 <div class="list-padding">
+    <mat-checkbox color="primary" (ngModelChange)="updateSSReady($event)" [(ngModel)]="ssReady">All group members are added</mat-checkbox>
     <div class="user-util">
-        <button [disabled]="secretSanta !== ''" type="button" class="btn btn-primary btn-spacing" (click)="GetSecretSanta()">Get Secret Santa</button>
+        <div [matTooltipDisabled]="ssReady" matTooltip="Mark the checkbox to enable this button">
+            <button mat-raised-button [disabled]="secretSanta !== '' || !ssReady" type="button" class="btn btn-primary btn-spacing" (click)="GetSecretSanta()">Get Secret Santa</button>
+        </div>
         <div class="user-util__selected" *ngIf="secretSanta !== ''">You are secret santa for {{secretSanta}}</div>
     </div>
     <ul class="list-group">

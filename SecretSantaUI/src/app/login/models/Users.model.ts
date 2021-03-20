@@ -1,4 +1,3 @@
-
 export class Users {
     id: number = 0;
     email?: string = '';
@@ -7,4 +6,5 @@ export class Users {
     lastName?: string = '';
     amazonLink?: string;
     secretSanta?: number;
+    ssReady?: boolean;
 }
