@@ -1,24 +1,23 @@
 <nav class="navbar navbar-light justify-content-between" style="background-color: #e3f2fd; margin-bottom: 20px; z-index: 99999;">
-    <a class="navbar-brand">{{ page }}</a>
-    <form class="form-inline">
-      <div class="welcome">Welcome {{ user }}</div>
-      <input *ngIf="page !== 'Profile'" class="form-control mr-sm-2" type="search" [(ngModel)]="searchStr" [ngModelOptions]="{standalone: true}" placeholder="Search {{ page }}" aria-label="Search">
-      <button *ngIf="page !== 'Profile'" class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="SearchGroups()">Search</button>
-      <button class="btn btn-outline-dark profile__button" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  <a class="navbar-brand">{{ page }}</a>
+  <form class="form-inline">
+    <div class="welcome">Welcome {{ user }}</div>
+    <input *ngIf="page !== 'Profile'" class="form-control mr-sm-2" type="input" (keyup)="Search()" [(ngModel)]="searchStr" [ngModelOptions]="{standalone: true}" placeholder="Search {{ page }}" aria-label="Search">
+    <button class="btn btn-outline-dark profile__button" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Profile
+    </button>
+  </form>
+</nav>
+<div class="profile">
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <div [routerLink]="['/profile']" class="dropdown dropdown__profile">
         Profile
-      </button>
-    </form>
-  </nav>
-  <div class="profile">
-    <div class="collapse" id="collapseExample">
-      <div class="card card-body">
-        <div [routerLink]="['/profile']" class="dropdown dropdown__profile">
-          Profile
-        </div>
-        <div class="dropdown" (click)="Logout()">
-          Logout
-        </div>
+      </div>
+      <div class="dropdown" (click)="Logout()">
+        Logout
       </div>
     </div>
   </div>
+</div>
  

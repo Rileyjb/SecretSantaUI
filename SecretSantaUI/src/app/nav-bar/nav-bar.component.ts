@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('currentUser') || '{}').firstName;
   }
 
-  public SearchGroups(): void {
+  public Search(): void {
     this.groupService.GroupSearch(this.searchStr!);
   }
 
